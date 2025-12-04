@@ -18,7 +18,7 @@ pros::v5::Motor roller(0);
 pros::v5::Motor hooks(0);
 // Sensor ports
 //pros::v5::Rotation liftrotation(7);
-pros::v5::Imu Gyro(18);
+pros::v5::Imu Gyro(3);
 pros::v5::Distance Dis(7);
 pros::v5::Optical color(2);
 pros::v5::Rotation horizontalencoder(-9);// Yet to declare

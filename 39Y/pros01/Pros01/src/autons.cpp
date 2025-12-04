@@ -16,6 +16,141 @@ static double integral = 0;
 
 int intakemode = 0;
 int liftmode = 0;
+
+void Skills() {
+
+    Left.move(12000); 
+    Right.move(12000);
+
+        pros::delay(800);
+
+        Left.move(0);
+        Right.move(0);
+    
+  
+
+}
+void RedRightAuton(){
+    chassis.setBrakeMode(pros::E_MOTOR_BRAKE_HOLD);
+    chassis.setPose(-53.5,-9,295, false);
+    ChangeIntakeState(2, 2);
+    chassis.moveToPoint(-24, -23, 3000, {.forwards = false, .maxSpeed = 60},false);
+
+    //chassis.moveToPoint(-12.5, -12.5, 1000, {.forwards = false},false); 
+    chassis.turnToHeading(225, 2000, {}, false);
+
+    //chassis.moveToPoint(-11, -10, 1000, {.forwards = false},false);
+    //ChangeIntakeState(7, 1);
+   // pros::delay(1000);
+   // ChangeIntakeState(2, 1);
+
+   // pros::delay(200);
+
+    chassis.moveToPoint(-47, -48, 2000, {.forwards = true},false);
+
+    doinker.set_value(true);
+    ChangeIntakeState(2, 2);
+
+    chassis.turnToHeading(90, 2000, {}, false);
+
+    chassis.moveToPoint(-63.25, -46, 1000, {.forwards = false, .maxSpeed = 65},false);
+
+    pros::delay(800);
+    ChangeIntakeState(5, 2);
+    //chassis.turnToHeading(90, 2000, {}, false);
+
+    //pros::delay(2000);
+
+
+
+    
+
+    chassis.moveToPoint(-25, -46, 2000, {.forwards = true, .maxSpeed = 55},false);
+     //high.move_voltage(-12000);
+     //pros::delay(200);
+    ChangeIntakeState(1, 2);
+
+    pros::delay(2500);
+ chassis.moveToPoint(-45, -46, 2000, {.forwards = false},false);
+    chassis.turnToHeading(140, 2000, {}, false);
+chassis.moveToPoint(-32, -60, 2000, {.forwards = true},false);
+ chassis.turnToHeading(90, 2000, {}, false);
+
+doinker2.set_value(true);
+delay(200);
+
+doinker2.set_value(false);
+chassis.moveToPoint(-10, -60, 2000, {.forwards = true, .maxSpeed = 55},false);
+
+
+doinker2.set_value(true);
+
+
+}
+
+void BlueRightAuton(){
+  chassis.setBrakeMode(pros::E_MOTOR_BRAKE_HOLD);
+    chassis.setPose(-53.5,-9,295, false);
+    ChangeIntakeState(2, 1);
+    chassis.moveToPoint(-24, -23, 3000, {.forwards = false, .maxSpeed = 60},false);
+
+    //chassis.moveToPoint(-12.5, -12.5, 1000, {.forwards = false},false); 
+    chassis.turnToHeading(225, 2000, {}, false);
+
+    //chassis.moveToPoint(-11, -10, 1000, {.forwards = false},false);
+    //ChangeIntakeState(7, 1);
+   // pros::delay(1000);
+   // ChangeIntakeState(2, 1);
+
+   // pros::delay(200);
+
+    chassis.moveToPoint(-47, -48, 2000, {.forwards = true},false);
+
+    doinker.set_value(true);
+    ChangeIntakeState(2, 1);
+
+    chassis.turnToHeading(90, 2000, {}, false);
+
+    chassis.moveToPoint(-63.25, -46, 1000, {.forwards = false, .maxSpeed = 55},false);
+
+    pros::delay(800);
+    ChangeIntakeState(5, 1);
+    //chassis.turnToHeading(90, 2000, {}, false);
+
+    //pros::delay(2000);
+
+
+
+    
+////
+    chassis.moveToPoint(-25, -46, 2000, {.forwards = true,},false);
+    // high.move_voltage(-12000);
+    // pros::delay(200);
+    //ChangeIntakeState(1, 1);
+
+    pros::delay(2500);
+ chassis.moveToPoint(-45, -46, 2000, {.forwards = false},false);
+    chassis.turnToHeading(140, 2000, {}, false);
+chassis.moveToPoint(-32, -60, 2000, {.forwards = true},false);
+ chassis.turnToHeading(90, 2000, {}, false);
+
+doinker2.set_value(true);
+delay(200);
+
+doinker2.set_value(false);
+chassis.moveToPoint(-10, -60, 2000, {.forwards = true,},false);
+
+//doinker2.set_value(true);
+
+
+
+}
+
+
+
+
+
+
 // Function to normalize angle to -180 to 180 degrees
 double normalizeAngle(double angle) {
     while (angle > 180) angle -= 360;
@@ -93,25 +228,34 @@ void turnToAngle(double targetAngle) {
 // Example usage in main program
 
 void turnAuton(){
-    //chassis.turnToHeading(90, 5000);
-    //ChangeLiftState(4, 0);
+    chassis.setBrakeMode(pros::E_MOTOR_BRAKE_HOLD);
+    chassis.setPose(0,0,0, false);
 
-    clamp.set_value(true);
+    chassis.turnToHeading( 90, 2000, {}, false);
+    pros::delay(350);
 
-    ChangeIntakeState(1, 1);
+    chassis.turnToHeading( 180, 2000, {}, false);
+    pros::delay(350);
+
+    chassis.turnToHeading( 270, 2000, {}, false);
+    pros::delay(350);
+
+    chassis.turnToHeading( 0, 2000, {}, false);
+    pros::delay(350);
+
 
 }
 
 void movetest(){
 
     chassis.setBrakeMode(pros::E_MOTOR_BRAKE_HOLD);
-    Left.move(-12000);
-    Right.move(-12000);
+    chassis.setPose(0,0,0, false);
 
-    pros::delay(350);
+    chassis.moveToPoint(0,36, 3000, {.forwards = true }, true);
+    pros::delay(600);
 
-    Left.move(0);
-    Right.move(0);
+    chassis.moveToPoint(0,0, 3000, {.forwards = false }, true);
+    pros::delay(600);
 
 
 }
@@ -262,7 +406,7 @@ void RedNegQual(){
 
     delay(200);
     Left.move(8000);
-        Right.move(8000);
+    Right.move(8000);
 
         pros::delay(420);
 
@@ -591,6 +735,8 @@ void BluePos6Ring(){
 
 
     chassis.moveToPoint(65,-66, 800, {.forwards = false,.maxSpeed = 100, .minSpeed = 55},false);
+
+    
 
     delay(200);
     Left.move(11000);

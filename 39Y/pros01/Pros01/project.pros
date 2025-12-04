@@ -1,7 +1,7 @@
 {
   "py/object": "pros.conductor.project.Project",
   "py/state": {
-    "project_name": "BluePos6Ring",
+    "project_name": "BluePos7Ring",
     "target": "v5",
     "templates": {
       "LemLib": {

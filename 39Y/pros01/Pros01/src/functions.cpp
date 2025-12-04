@@ -273,21 +273,22 @@ void pushback_intake(){
 
     while(1){
         int colorflag = 0;
-            if (color.get_hue() < 40) {
+            if (color.get_hue() < 25) {
             colorflag = 1;
         } else if (color.get_hue() > 70) {
             colorflag = 2;
         }
         
-        if(master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)){
+        //R1 for eric, L1 for abby
+        if(master.get_digital(pros::E_CONTROLLER_DIGITAL_R1) || IntakeState == 1){ //score long goal
             
-            top.move_voltage(12000);
+           top.move_voltage(12000);
             high.move_voltage(12000);
             mid.move_voltage(8000);
             low.move_voltage(12000);
         }
 
-        else if(master.get_digital(pros::E_CONTROLLER_DIGITAL_L1)){
+        else if(master.get_digital(pros::E_CONTROLLER_DIGITAL_L1) || IntakeState == 2){ //intake
             top.move_voltage(-12000);
             high.move_voltage(12000);
             mid.move_voltage(12000);
@@ -295,7 +296,23 @@ void pushback_intake(){
             
         }
 
-        else if(master.get_digital(pros::E_CONTROLLER_DIGITAL_L2)){
+        else if(master.get_digital(pros::E_CONTROLLER_DIGITAL_L1) || IntakeState == 6){ //intake only bottom
+           // top.move_voltage(-12000);
+           // high.move_voltage(12000);
+            mid.move_voltage(8000);
+            low.move_voltage(-12000);
+            
+        }
+
+        else if(master.get_digital(pros::E_CONTROLLER_DIGITAL_L1) || IntakeState == 7){ //intake only bottom only low
+           // top.move_voltage(-12000);
+           // high.move_voltage(12000);
+            mid.move_voltage(-12000);
+            low.move_voltage(12000);
+            
+        }
+
+        else if(master.get_digital(pros::E_CONTROLLER_DIGITAL_L2) || IntakeState == 3){ //outtake to low goal
             top.move_voltage(12000);
             high.move_voltage(-12000);
             mid.move_voltage(- 12000);
@@ -303,25 +320,25 @@ void pushback_intake(){
             
         }
 
-        else if(master.get_digital(pros::E_CONTROLLER_DIGITAL_R2)){
+        else if(master.get_digital(pros::E_CONTROLLER_DIGITAL_R2) || IntakeState == 4){ //outtake to mid goal
             top.move_voltage(5000);
             high.move_voltage(-12000);
-            mid.move_voltage(12000);
+            mid.move_voltage(6000);
             low.move_voltage(12000);
             
         }
 
       //sort 
-        else if(master.get_digital(pros::E_CONTROLLER_DIGITAL_A)){
+        else if(master.get_digital(pros::E_CONTROLLER_DIGITAL_A) || IntakeState == 5){ //sort blue, change color flag to change sort color
             
         
 
-        if (colorflag == 2){
+        if (colorflag == IntakeSort){
             top.move_voltage(-12000);
             high.move_voltage(-12000);
             mid.move_voltage(8000);
             low.move_voltage(10000);
-            pros::delay(250);
+            pros::delay(160);
         }
 
 
@@ -333,6 +350,108 @@ void pushback_intake(){
 
             
         }
+        
+
+     
+        else{
+            top.move_voltage(0);
+            high.move_voltage(0);
+            mid.move_voltage(0);
+            low.move_voltage(0);
+            
+        }
+
+        pros::delay(5);
+    }
+}
+
+
+void pushback_intake_tank(){
+
+    bool waitTillRing = false;
+    hooks.set_encoder_units(pros::E_MOTOR_ENCODER_DEGREES);
+    hooks.set_brake_mode(MotorBrake::brake);
+
+    while(1){
+        int colorflag = 0;
+            if (color.get_hue() < 25) {
+            colorflag = 1;
+        } else if (color.get_hue() > 70) {
+            colorflag = 2;
+        }
+        
+        //R1 for eric, L1 for abby
+        if(master.get_digital(pros::E_CONTROLLER_DIGITAL_L1) || IntakeState == 1){ //score long goal
+            
+           top.move_voltage(12000);
+            high.move_voltage(12000);
+            mid.move_voltage(8000);
+            low.move_voltage(12000);
+        }
+
+        else if(master.get_digital(pros::E_CONTROLLER_DIGITAL_R1) || IntakeState == 2){ //intake
+            top.move_voltage(-12000);
+            high.move_voltage(12000);
+            mid.move_voltage(12000);
+            low.move_voltage(-12000);
+            
+        }
+
+        else if(master.get_digital(pros::E_CONTROLLER_DIGITAL_R1) || IntakeState == 6){ //intake only bottom
+           // top.move_voltage(-12000);
+           // high.move_voltage(12000);
+            mid.move_voltage(8000);
+            low.move_voltage(-12000);
+            
+        }
+
+        else if(master.get_digital(pros::E_CONTROLLER_DIGITAL_R1) || IntakeState == 7){ //intake only bottom only low
+           // top.move_voltage(-12000);
+           // high.move_voltage(12000);
+            mid.move_voltage(-12000);
+            low.move_voltage(12000);
+            
+        }
+
+        else if(master.get_digital(pros::E_CONTROLLER_DIGITAL_R2) || IntakeState == 3){ //outtake to low goal
+            top.move_voltage(12000);
+            high.move_voltage(-12000);
+            mid.move_voltage(- 12000);
+            low.move_voltage(12000);
+            
+        }
+
+        else if(master.get_digital(pros::E_CONTROLLER_DIGITAL_L2) || IntakeState == 4){ //outtake to mid goal
+            top.move_voltage(5000);
+            high.move_voltage(-12000);
+            mid.move_voltage(6000);
+            low.move_voltage(12000);
+            
+        }
+
+      //sort 
+        else if(master.get_digital(pros::E_CONTROLLER_DIGITAL_A) || IntakeState == 5){ //sort blue, change color flag to change sort color
+            
+        
+
+        if (colorflag == IntakeSort){
+            top.move_voltage(-12000);
+            high.move_voltage(-12000);
+            mid.move_voltage(8000);
+            low.move_voltage(10000);
+            pros::delay(160);
+        }
+
+
+            
+            top.move_voltage(-12000);
+            high.move_voltage(6000);
+            mid.move_voltage(8000);
+            low.move_voltage(10000);
+
+            
+        }
+        
 
      
         else{

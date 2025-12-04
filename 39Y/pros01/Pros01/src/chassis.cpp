@@ -8,7 +8,7 @@
 
 lemlib::Drivetrain drivetrain(&Left,
                               &Right,
-                              11.5, //change
+                              12, //change
                               lemlib::Omniwheel::NEW_325, //change
                               450,
                               20 // horizontal drift, we can go fast on corners now
@@ -19,7 +19,7 @@ lemlib::Drivetrain drivetrain(&Left,
 lemlib::TrackingWheel xPod(&horizontalencoder, lemlib::Omniwheel::NEW_2, 1.83); // tune this value please
 lemlib::TrackingWheel yPod(&verticalencoder, lemlib::Omniwheel::NEW_275, -0.75);
 
-lemlib::OdomSensors sensors(&yPod, nullptr, nullptr, nullptr, &Gyro);
+lemlib::OdomSensors sensors(nullptr, nullptr, nullptr, nullptr, &Gyro);
 
 lemlib::ControllerSettings lateral_controller(6, // proportional gain (kP)
                                               1, // integral gain (kI)

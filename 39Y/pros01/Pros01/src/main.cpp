@@ -89,17 +89,20 @@ void competition_initialize() {}
 
  
 void autonomous() {
-BluePos6Ring();
+//movetest();
+//RedRightAuton();
+BlueRightAuton();
+//Skills();
 }
 
 
 
 bool clampValue = false;
-bool intakeliftValue = false;
+bool intakeliftValue = true;
 bool doinkerValue = false;
 bool doinkerValue2 = false;
 
-
+bool toggle = false;
 void opcontrol() {
 
 	pros::Task driverTask(drive);
@@ -121,12 +124,32 @@ void opcontrol() {
 		if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B)){
 			doinkerValue = !doinkerValue;
 		}
+
+		if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A)){
+
+			if(toggle== false){
+			
+			ChangeIntakeState(5, 1); //2 for sorting blue
+			toggle = true;
+			}
+			else if(toggle==true) {
+				ChangeIntakeState(0, 1);
+			toggle = false;
+			
+
+			}
+	
+
+		}
+		pros::delay(20);
+		
+		
 		clamp.set_value(clampValue);
 		//intakelift.set_value(intakeliftValue);
 		doinker.set_value(doinkerValue);
 		doinker2.set_value(doinkerValue2);
 
-		pros::delay(20);
+		
 	}
 		//pros::lcd::print(0, "X: %f", (float) ColorSensor.get_hue());
 

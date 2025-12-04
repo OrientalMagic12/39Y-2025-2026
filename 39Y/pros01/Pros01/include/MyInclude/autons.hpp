@@ -21,3 +21,8 @@ void BluePosDisrupt();
 
 void RedPosDisrupt();
 
+void RedRightAuton();
+
+void BlueRightAuton();
+
+void Skills();
